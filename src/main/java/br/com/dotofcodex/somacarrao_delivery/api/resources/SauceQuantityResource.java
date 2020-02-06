@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 
 import br.com.dotofcodex.somacarrao_delivery.model.SauceQuantity;
 
-@Path("/suaceQuantity")
+@Path("/sauceQuantity")
 @Produces(MediaType.APPLICATION_JSON)
 @Singleton
 public class SauceQuantityResource {
