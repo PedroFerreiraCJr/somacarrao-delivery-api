@@ -9,24 +9,20 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 
 @JsonInclude(Include.NON_NULL)
-public class User {
+public class Auth {
 
 	private Long id;
 	private String uuid;
-	private String name;
-	private String surname;
 	private String email;
 	private String password;
-	private String cellphone;
 
-	public User() {
+	public Auth() {
 		super();
 	}
 
-	public User(Long id, String name, String email) {
+	public Auth(Long id, String email) {
 		super();
 		this.id = id;
-		this.name = name;
 		this.email = email;
 	}
 
@@ -46,22 +42,6 @@ public class User {
 		this.uuid = uuid;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -78,20 +58,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getCellphone() {
-		return cellphone;
-	}
-
-	public void setCellphone(String cellphone) {
-		this.cellphone = cellphone;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User [id=").append(id).append(", uuid=").append(uuid).append(", name=").append(name)
-				.append(", surname=").append(surname).append(", email=").append(email).append(", password=")
-				.append(password).append(", cellphone=").append(cellphone).append("]");
+		builder.append("Auth [id=").append(id).append(", uuid=").append(uuid).append(", email=").append(email)
+				.append(", password=").append(password).append("]");
 		return builder.toString();
 	}
 }

@@ -14,11 +14,13 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 
+import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.model.Pasta;
 
 @Path("/pasta")
 @Produces(MediaType.APPLICATION_JSON)
 @Singleton
+@JWTTokenSecured
 public class PastaResource {
 
 	private final static Logger logger = Logger.getLogger(PastaResource.class);

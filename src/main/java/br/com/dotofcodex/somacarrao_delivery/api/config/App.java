@@ -7,8 +7,10 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import br.com.dotofcodex.somacarrao_delivery.api.filters.CorsFilter;
+import br.com.dotofcodex.somacarrao_delivery.api.filters.JwtFilter;
 import br.com.dotofcodex.somacarrao_delivery.api.filters.LoggingFilter;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.AddressResource;
+import br.com.dotofcodex.somacarrao_delivery.api.resources.AuthenticationResource;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.DrinkResource;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.ExtraResource;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.FlavorResource;
@@ -33,8 +35,10 @@ public class App extends Application {
 	public Set<Class<?>> getClasses() {
 		final Set<Class<?>> classes = new HashSet<Class<?>>();
 		classes.add(LoggingFilter.class);
+		classes.add(JwtFilter.class);
 		classes.add(CorsFilter.class);
 
+		classes.add(AuthenticationResource.class);
 		classes.add(PastaResource.class);
 		classes.add(FlavorResource.class);
 		classes.add(SauceResource.class);
