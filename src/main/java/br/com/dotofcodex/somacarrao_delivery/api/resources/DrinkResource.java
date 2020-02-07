@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Singleton;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -14,11 +18,13 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 
+import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.model.Drink;
 
 @Path("/drink")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces({ MediaType.APPLICATION_JSON })
 @Singleton
+@JWTTokenSecured
 public class DrinkResource {
 
 	private final static Logger logger = Logger.getLogger(DrinkResource.class);
@@ -26,10 +32,12 @@ public class DrinkResource {
 	private static final List<Drink> DRINKS;
 	static {
 		DRINKS = new ArrayList<>();
-		DRINKS.add(new Drink(1l, "Espaguete"));
-		DRINKS.add(new Drink(2l, "Penne"));
-		DRINKS.add(new Drink(3l, "Parafuso"));
-		DRINKS.add(new Drink(4l, "Massa Integral"));
+		DRINKS.add(new Drink(1l, "Maracujá"));
+		DRINKS.add(new Drink(2l, "Cajá"));
+		DRINKS.add(new Drink(3l, "Abacaxí"));
+		DRINKS.add(new Drink(4l, "Acerola"));
+		DRINKS.add(new Drink(5l, "Laranja"));
+		DRINKS.add(new Drink(6l, "Limonada"));
 	}
 
 	public DrinkResource() {
@@ -66,4 +74,21 @@ public class DrinkResource {
 		return Response.ok().entity(result).build();
 	}
 
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response create(Drink drink) {
+		return null;
+	}
+
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response update(Drink drink) {
+		return null;
+	}
+
+	@DELETE
+	@Path("/{id}")
+	public Response delete(@PathParam("id") Long id) {
+		return null;
+	}
 }

@@ -23,7 +23,7 @@ import br.com.dotofcodex.somacarrao_delivery.service.AuthenticationService;
  */
 
 @Path("/auth")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces({ MediaType.APPLICATION_JSON })
 @Singleton
 public class AuthenticationResource {
 

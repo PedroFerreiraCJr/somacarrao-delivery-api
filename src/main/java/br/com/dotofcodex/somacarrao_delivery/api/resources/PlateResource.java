@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Singleton;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -14,11 +18,13 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 
+import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.model.Plate;
 
 @Path("/plate")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces({ MediaType.APPLICATION_JSON })
 @Singleton
+@JWTTokenSecured
 public class PlateResource {
 
 	private final static Logger logger = Logger.getLogger(PlateResource.class);
@@ -26,10 +32,6 @@ public class PlateResource {
 	private static final List<Plate> PLATES;
 	static {
 		PLATES = new ArrayList<>();
-		PLATES.add(new Plate(1l, "Espaguete"));
-		PLATES.add(new Plate(2l, "Penne"));
-		PLATES.add(new Plate(3l, "Parafuso"));
-		PLATES.add(new Plate(4l, "Massa Integral"));
 	}
 
 	public PlateResource() {
@@ -66,4 +68,21 @@ public class PlateResource {
 		return Response.ok().entity(result).build();
 	}
 
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response create(Plate plate) {
+		return null;
+	}
+
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response update(Plate plate) {
+		return null;
+	}
+
+	@DELETE
+	@Path("/{id}")
+	public Response delete(@PathParam("id") Long id) {
+		return null;
+	}
 }

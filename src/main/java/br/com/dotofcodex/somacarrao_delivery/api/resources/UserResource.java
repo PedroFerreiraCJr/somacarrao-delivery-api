@@ -30,7 +30,6 @@ public class UserResource {
 
 	@GET
 	@Path("/{id}")
-	@Produces({ MediaType.APPLICATION_JSON })
 	public Response getById(@PathParam("id") Long id) {
 		logger.info("getById");
 		return Response.ok().build();
@@ -38,7 +37,6 @@ public class UserResource {
 
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
-	@Produces({ MediaType.APPLICATION_JSON })
 	public Response create(User user) {
 		logger.info("create");
 

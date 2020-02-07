@@ -1,42 +1,43 @@
 package br.com.dotofcodex.somacarrao_delivery.model;
 
-public enum SauceQuantity {
+public class SauceQuantity {
 
-	NONE(0, "Nenhum"), LITTLE(1, "Pouco"), NORMAL(2, "Normal"), MUCH(3, "Muito");
+	private Long id;
+	private String name;
+	private String description;
 
-	private int id;
-	private String value;
+	public SauceQuantity() {
+		super();
+	}
 
-	private SauceQuantity(int id, String value) {
+	public SauceQuantity(Long id, String name) {
+		super();
 		this.id = id;
-		this.value = value;
+		this.name = name;
 	}
 
-	public int getId() {
-		return this.id;
+	public Long getId() {
+		return id;
 	}
 
-	public String getValue() {
-		return this.value;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public static SauceQuantity byId(int id) throws Exception {
-		switch (id) {
-			case 0: {
-				return NONE;
-			}
-			case 1: {
-				return LITTLE;
-			}
-			case 2: {
-				return NORMAL;
-			}
-			case 3: {
-				return MUCH;
-			}
-			default: {
-				throw new IllegalArgumentException("SauceQuantity invalid");
-			}
-		}
+	public String getName() {
+		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }

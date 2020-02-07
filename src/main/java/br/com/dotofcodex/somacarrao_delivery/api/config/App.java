@@ -9,6 +9,7 @@ import javax.ws.rs.core.Application;
 import br.com.dotofcodex.somacarrao_delivery.api.filters.CorsFilter;
 import br.com.dotofcodex.somacarrao_delivery.api.filters.JwtFilter;
 import br.com.dotofcodex.somacarrao_delivery.api.filters.LoggingFilter;
+import br.com.dotofcodex.somacarrao_delivery.api.mapper.UnauthorizedMapper;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.AddressResource;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.AuthenticationResource;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.DrinkResource;
@@ -37,6 +38,7 @@ public class App extends Application {
 		classes.add(LoggingFilter.class);
 		classes.add(JwtFilter.class);
 		classes.add(CorsFilter.class);
+		classes.add(UnauthorizedMapper.class);
 
 		classes.add(AuthenticationResource.class);
 		classes.add(PastaResource.class);

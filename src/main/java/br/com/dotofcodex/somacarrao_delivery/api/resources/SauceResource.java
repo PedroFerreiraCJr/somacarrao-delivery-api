@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Singleton;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -14,11 +18,13 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 
+import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.model.Sauce;
 
 @Path("/sauce")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces({ MediaType.APPLICATION_JSON })
 @Singleton
+@JWTTokenSecured
 public class SauceResource {
 
 	private final static Logger logger = Logger.getLogger(SauceResource.class);
@@ -26,15 +32,13 @@ public class SauceResource {
 	private static final List<Sauce> SAUCES;
 	static {
 		SAUCES = new ArrayList<>();
-		SAUCES.add(new Sauce(1l, "Espaguete"));
-		SAUCES.add(new Sauce(2l, "Penne"));
-		SAUCES.add(new Sauce(3l, "Parafuso"));
-		SAUCES.add(new Sauce(4l, "Massa Integral"));
+		SAUCES.add(new Sauce(1l, "Molho do Tomate"));
+		SAUCES.add(new Sauce(2l, "Molho Branco"));
 	}
 
 	public SauceResource() {
 		super();
-		logger.info("SimpleResource instantiated");
+		logger.info("SauceResource instantiated");
 	}
 
 	@GET
@@ -66,4 +70,22 @@ public class SauceResource {
 		return Response.ok().entity(result).build();
 	}
 
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response create(Sauce sauce) {
+		return null;
+	}
+
+	@PUT
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public Response update(Sauce sauce) {
+		return null;
+	}
+
+	@DELETE
+	@Path("/{id}")
+	public Response delete(@PathParam("id") Long id) {
+		return null;
+	}
+	
 }

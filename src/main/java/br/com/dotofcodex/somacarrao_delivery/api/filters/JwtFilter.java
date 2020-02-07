@@ -3,6 +3,7 @@ package br.com.dotofcodex.somacarrao_delivery.api.filters;
 import java.io.IOException;
 
 import javax.annotation.Priority;
+import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -36,7 +37,8 @@ public class JwtFilter implements ContainerRequestFilter {
 				.parseClaimsJws(token);
 		} catch (Exception e) {
 			logger.debug(e.getMessage(), e);
-			requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+			throw new NotAuthorizedException(Response.status(Response.Status.UNAUTHORIZED).build());
+			//requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
 		}
 	}
 
