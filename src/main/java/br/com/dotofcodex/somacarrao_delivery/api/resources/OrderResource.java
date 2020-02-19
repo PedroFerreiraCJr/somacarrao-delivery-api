@@ -40,32 +40,9 @@ public class OrderResource {
 	}
 
 	@GET
-	public Response getAll() {
-		logger.info("getAll");
-		return Response.ok().entity(ORDERS).build();
-	}
-
-	@GET
 	@Path("/{id}")
 	public Response getById(@PathParam("id") Long id) {
-		logger.info("getById");
-		Order result = null;
-		if (id != null) {
-			for (Order order : ORDERS) {
-				if (order.getId().equals(id)) {
-					logger.info("pasta found");
-					result = order;
-					break;
-				}
-			}
-		}
-
-		if (result == null) {
-			logger.info("pasta not found");
-			return Response.status(Status.NOT_FOUND).build();
-		}
-
-		return Response.ok().entity(result).build();
+		return Response.ok().build();
 	}
 
 	@POST
