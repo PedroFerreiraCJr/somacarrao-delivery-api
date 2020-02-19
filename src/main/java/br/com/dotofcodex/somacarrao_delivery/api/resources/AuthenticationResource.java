@@ -60,7 +60,10 @@ public class AuthenticationResource {
 		if (authentication != null) {
 			String uuid = authentication.getUuid();
 			if ("B9828066-B1E1-4AFD-B55B-E3E2994CE558".equals(uuid)) {
-				return Response.ok().entity(new AuthenticationService().issueJwtToken(authentication, uriInfo.getAbsolutePath().toString())).build();				
+				Auth auth = new Auth();
+				auth.setUuid("B9828066-B1E1-4AFD-B55B-E3E2994CE558");
+				auth.setAccessToken(new AuthenticationService().issueJwtToken(authentication, uriInfo.getAbsolutePath().toString()));
+				return Response.ok().entity(auth).build();				
 			}
 		}
 		
