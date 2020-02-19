@@ -2,6 +2,7 @@ package br.com.dotofcodex.somacarrao_delivery.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * More information in the following link:
@@ -15,6 +16,9 @@ public class Auth {
 	private String uuid;
 	private String email;
 	private String password;
+	
+	@JsonProperty("access_token")
+	private String accessToken;
 
 	public Auth() {
 		super();
@@ -58,11 +62,12 @@ public class Auth {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Auth [id=").append(id).append(", uuid=").append(uuid).append(", email=").append(email)
-				.append(", password=").append(password).append("]");
-		return builder.toString();
+	public String getAccessToken() {
+		return accessToken;
 	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
 }
