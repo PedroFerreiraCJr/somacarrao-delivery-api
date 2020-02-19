@@ -5,7 +5,7 @@
 	<groupId>br.com.dotofcodex</groupId>
 	<artifactId>somacarrao-delivery</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	
 	<developers>
 		<developer>
