@@ -16,7 +16,7 @@ public class Auth {
 	private String uuid;
 	private String email;
 	private String password;
-	
+
 	@JsonProperty("access_token")
 	private String accessToken;
 
@@ -68,6 +68,14 @@ public class Auth {
 
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Auth [id=").append(id).append(", uuid=").append(uuid).append(", email=").append(email)
+				.append(", password=").append(password).append(", accessToken=").append(accessToken).append("]");
+		return builder.toString();
 	}
 
 }
