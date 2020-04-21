@@ -16,7 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.model.Seasoning;
@@ -27,8 +28,8 @@ import br.com.dotofcodex.somacarrao_delivery.model.Seasoning;
 @JWTTokenSecured
 public class SeasoningResource {
 
-	private final static Logger logger = Logger.getLogger(SeasoningResource.class);
-
+	private static final Logger logger = LoggerFactory.getLogger(SeasoningResource.class);
+	
 	private static final List<Seasoning> SEASONINGS;
 	static {
 		SEASONINGS = new ArrayList<>();

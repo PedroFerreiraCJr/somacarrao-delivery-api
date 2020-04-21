@@ -12,7 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.model.User;
 
@@ -21,7 +22,7 @@ import br.com.dotofcodex.somacarrao_delivery.model.User;
 @Singleton
 public class UserResource {
 
-	private final static Logger logger = Logger.getLogger(UserResource.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserResource.class);
 
 	public UserResource() {
 		super();

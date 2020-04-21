@@ -16,7 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.model.Sauce;
@@ -27,7 +28,7 @@ import br.com.dotofcodex.somacarrao_delivery.model.Sauce;
 @JWTTokenSecured
 public class SauceResource {
 
-	private final static Logger logger = Logger.getLogger(SauceResource.class);
+	private static final Logger logger = LoggerFactory.getLogger(SauceResource.class);
 
 	private static final List<Sauce> SAUCES;
 	static {
@@ -87,5 +88,5 @@ public class SauceResource {
 	public Response delete(@PathParam("id") Long id) {
 		return null;
 	}
-	
+
 }

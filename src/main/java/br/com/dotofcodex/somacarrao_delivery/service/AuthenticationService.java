@@ -3,6 +3,9 @@ package br.com.dotofcodex.somacarrao_delivery.service;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import br.com.dotofcodex.somacarrao_delivery.model.Auth;
 import br.com.dotofcodex.somacarrao_delivery.util.DateTimeUtil;
 import br.com.dotofcodex.somacarrao_delivery.util.KeyGeneratorUtil;
@@ -10,6 +13,8 @@ import io.jsonwebtoken.Jwts;
 
 public class AuthenticationService {
 
+	private static final Logger logger = LoggerFactory.getLogger(AuthenticationService.class);
+	
 	public AuthenticationService() {
 		super();
 	}

@@ -14,9 +14,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.model.Order;
@@ -27,7 +27,7 @@ import br.com.dotofcodex.somacarrao_delivery.model.Order;
 @JWTTokenSecured
 public class OrderResource {
 
-	private final static Logger logger = Logger.getLogger(OrderResource.class);
+	private static final Logger logger = LoggerFactory.getLogger(OrderResource.class);
 
 	private static final List<Order> ORDERS;
 	static {

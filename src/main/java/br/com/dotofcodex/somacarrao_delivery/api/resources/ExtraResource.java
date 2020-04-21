@@ -16,7 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.model.Extra;
@@ -27,7 +28,7 @@ import br.com.dotofcodex.somacarrao_delivery.model.Extra;
 @JWTTokenSecured
 public class ExtraResource {
 
-	private final static Logger logger = Logger.getLogger(ExtraResource.class);
+	private static final Logger logger = LoggerFactory.getLogger(ExtraResource.class);
 
 	private static final List<Extra> EXTRAS;
 	static {

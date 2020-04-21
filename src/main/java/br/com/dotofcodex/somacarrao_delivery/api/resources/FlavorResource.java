@@ -16,7 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.model.Flavor;
@@ -27,7 +28,7 @@ import br.com.dotofcodex.somacarrao_delivery.model.Flavor;
 @JWTTokenSecured
 public class FlavorResource {
 
-	private final static Logger logger = Logger.getLogger(FlavorResource.class);
+	private static final Logger logger = LoggerFactory.getLogger(FlavorResource.class);
 
 	private static final List<Flavor> FLAVORS;
 	static {

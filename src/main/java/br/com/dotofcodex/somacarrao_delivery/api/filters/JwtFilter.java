@@ -11,7 +11,8 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.util.KeyGeneratorUtil;
@@ -22,11 +23,11 @@ import io.jsonwebtoken.Jwts;
 @JWTTokenSecured
 public class JwtFilter implements ContainerRequestFilter {
 
-	private final static Logger logger = Logger.getLogger(JwtFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
 	
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
-		logger.info("new request");
+		logger.info("new request for container request jwt filter");
 		
 		try {
 			String token = getTokenFromHeader(requestContext);

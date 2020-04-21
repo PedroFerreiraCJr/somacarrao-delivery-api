@@ -8,14 +8,19 @@ import javax.servlet.ServletException;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
 
+	private static final Logger logger = LoggerFactory.getLogger(Main.class);
+	
 	public static void main(String[] args) throws Exception {
 		new Main().start();
 	}
 
 	public void start() throws ServletException, LifecycleException, MalformedURLException {
+		logger.info("starting container...");
 		String webappDirLocation = "src/main/webapp/";
 		Tomcat tomcat = new Tomcat();
 
@@ -33,6 +38,7 @@ public class Main {
 
 		tomcat.start();
 		tomcat.getConnector();
+		logger.info("starting listening...");
 		tomcat.getServer().await();
 	}
 

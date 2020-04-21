@@ -12,7 +12,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.model.Auth;
 import br.com.dotofcodex.somacarrao_delivery.service.AuthenticationService;
@@ -27,8 +28,8 @@ import br.com.dotofcodex.somacarrao_delivery.service.AuthenticationService;
 @Singleton
 public class AuthenticationResource {
 
-	private final static Logger logger = Logger.getLogger(AuthenticationResource.class);
-
+	private static final Logger logger = LoggerFactory.getLogger(AuthenticationResource.class);
+	
 	@Context
 	private UriInfo uriInfo;
 	

@@ -6,6 +6,9 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import br.com.dotofcodex.somacarrao_delivery.api.filters.CorsFilter;
 import br.com.dotofcodex.somacarrao_delivery.api.filters.JwtFilter;
 import br.com.dotofcodex.somacarrao_delivery.api.filters.LoggingFilter;
@@ -28,8 +31,11 @@ import br.com.dotofcodex.somacarrao_delivery.api.resources.UserResource;
 @ApplicationPath("/api")
 public class App extends Application {
 
+	private static final Logger logger = LoggerFactory.getLogger(App.class);
+
 	public App() {
 		super();
+		logger.info("Application instantiated");
 	}
 
 	@Override

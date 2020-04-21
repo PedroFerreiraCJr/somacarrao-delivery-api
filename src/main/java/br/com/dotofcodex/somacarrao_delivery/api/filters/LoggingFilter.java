@@ -11,13 +11,14 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Provider
 @Priority(Integer.MIN_VALUE)
 public class LoggingFilter implements ContainerRequestFilter, ContainerResponseFilter {
 
-	private final static Logger logger = Logger.getLogger(LoggingFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoggingFilter.class);
 
 	@Context
 	private HttpServletRequest servletRequest;
@@ -25,14 +26,13 @@ public class LoggingFilter implements ContainerRequestFilter, ContainerResponseF
 	@Override
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
 			throws IOException {
-		logger.info("new response");
+		logger.info("new response for logging filter");
 	}
 
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
-		logger.info("new request");
-		String ip = servletRequest.getRemoteAddr();
-		logger.info(ip);
+		logger.info("new request for logging filter");
+		//String ip = servletRequest.getRemoteAddr();
 		/*
 		if (!"".equals(ip)) {
 			requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
