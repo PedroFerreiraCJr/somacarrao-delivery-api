@@ -1,8 +1,5 @@
 package br.com.dotofcodex.somacarrao_delivery.api.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,42 +16,30 @@ import javax.ws.rs.core.Response.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
+import br.com.dotofcodex.somacarrao_delivery.config.ContextConfig;
+import br.com.dotofcodex.somacarrao_delivery.dao.IngredientDAO;
 import br.com.dotofcodex.somacarrao_delivery.model.Ingredient;
 
 @Path("/ingredient")
 @Produces({ MediaType.APPLICATION_JSON })
 @Singleton
-@JWTTokenSecured
+//@JWTTokenSecured
 public class IngredientResource {
 
 	private static final Logger logger = LoggerFactory.getLogger(IngredientResource.class);
 
-	private static final List<Ingredient> INGREDIENTS;
-	static {
-		INGREDIENTS = new ArrayList<>();
-		INGREDIENTS.add(new Ingredient(1l, "Bacon"));
-		INGREDIENTS.add(new Ingredient(2l, "Cebola"));
-		INGREDIENTS.add(new Ingredient(3l, "Tomate"));
-		INGREDIENTS.add(new Ingredient(4l, "Pimentão"));
-		INGREDIENTS.add(new Ingredient(5l, "Alho"));
-		INGREDIENTS.add(new Ingredient(6l, "Azeitona"));
-		INGREDIENTS.add(new Ingredient(7l, "Uva Passa"));
-		INGREDIENTS.add(new Ingredient(8l, "Milho Verde"));
-		INGREDIENTS.add(new Ingredient(9l, "Mussarela"));
-		INGREDIENTS.add(new Ingredient(10l, "Queijo Ralado"));
-		INGREDIENTS.add(new Ingredient(11l, "Cheiro Verde"));
-	}
+	private IngredientDAO dao;
 
 	public IngredientResource() {
 		super();
 		logger.info("IngredientResource instantiated");
+		dao = ContextConfig.getInstance().getContext().getBean(IngredientDAO.class);
 	}
 
 	@GET
 	public Response getAll() {
 		logger.info("getAll");
-		return Response.ok().entity(INGREDIENTS).build();
+		return Response.ok().entity(dao.getAll()).build();
 	}
 
 	@GET
@@ -63,7 +48,7 @@ public class IngredientResource {
 		logger.info("getById");
 		Ingredient result = null;
 		if (id != null) {
-			for (Ingredient ingredient : INGREDIENTS) {
+			for (Ingredient ingredient : dao.getAll()) {
 				if (ingredient.getId().equals(id)) {
 					logger.info("pasta found");
 					result = ingredient;
