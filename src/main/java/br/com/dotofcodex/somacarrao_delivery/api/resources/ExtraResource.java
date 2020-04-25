@@ -1,8 +1,5 @@
 package br.com.dotofcodex.somacarrao_delivery.api.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
+import br.com.dotofcodex.somacarrao_delivery.config.ContextConfig;
+import br.com.dotofcodex.somacarrao_delivery.dao.ExtraDAO;
 import br.com.dotofcodex.somacarrao_delivery.model.Extra;
 
 @Path("/extra")
@@ -30,28 +29,18 @@ public class ExtraResource {
 
 	private static final Logger logger = LoggerFactory.getLogger(ExtraResource.class);
 
-	private static final List<Extra> EXTRAS;
-	static {
-		EXTRAS = new ArrayList<>();
-		EXTRAS.add(new Extra(1l, "Bacon"));
-		EXTRAS.add(new Extra(2l, "Calabresa"));
-		EXTRAS.add(new Extra(3l, "Presunto"));
-		EXTRAS.add(new Extra(4l, "Salsicha"));
-		EXTRAS.add(new Extra(5l, "Mussarela"));
-		EXTRAS.add(new Extra(6l, "Frango"));
-		EXTRAS.add(new Extra(7l, "Carne do Sol"));
-		EXTRAS.add(new Extra(8l, "Carne Moída"));
-	}
+	private ExtraDAO dao;
 
 	public ExtraResource() {
 		super();
 		logger.info("ExtraResource instantiated");
+		dao = ContextConfig.getInstance().getContext().getBean(ExtraDAO.class);
 	}
 
 	@GET
 	public Response getAll() {
 		logger.info("getAll");
-		return Response.ok().entity(EXTRAS).build();
+		return Response.ok().entity(dao.getAll()).build();
 	}
 
 	@GET
@@ -60,7 +49,7 @@ public class ExtraResource {
 		logger.info("getById");
 		Extra result = null;
 		if (id != null) {
-			for (Extra extra : EXTRAS) {
+			for (Extra extra : dao.getAll()) {
 				if (extra.getId().equals(id)) {
 					logger.info("pasta found");
 					result = extra;
