@@ -1,11 +1,18 @@
 package br.com.dotofcodex.somacarrao_delivery.model;
 
-public class Drink {
+import java.io.Serializable;
+
+public class Drink implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String name;
-	private String description;
 	private Double price;
+	private Double quantity;
+	private String unit;
+	private String description;
+	private Boolean available;
 
 	public Drink() {
 		super();
@@ -33,6 +40,30 @@ public class Drink {
 		this.name = name;
 	}
 
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Double getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -41,12 +72,46 @@ public class Drink {
 		this.description = description;
 	}
 
-	public Double getPrice() {
-		return price;
+	public Boolean getAvailable() {
+		return available;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setAvailable(Boolean available) {
+		this.available = available;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Drink other = (Drink) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Drink [id=").append(id).append(", name=").append(name).append(", price=").append(price)
+				.append(", quantity=").append(quantity).append(", unit=").append(unit).append(", description=")
+				.append(description).append(", available=").append(available).append("]");
+		return builder.toString();
 	}
 
 }

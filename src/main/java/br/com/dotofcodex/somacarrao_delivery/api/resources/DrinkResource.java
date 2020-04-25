@@ -1,8 +1,5 @@
 package br.com.dotofcodex.somacarrao_delivery.api.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,37 +16,30 @@ import javax.ws.rs.core.Response.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
+import br.com.dotofcodex.somacarrao_delivery.config.ContextConfig;
+import br.com.dotofcodex.somacarrao_delivery.dao.DrinkDAO;
 import br.com.dotofcodex.somacarrao_delivery.model.Drink;
 
 @Path("/drink")
 @Produces({ MediaType.APPLICATION_JSON })
 @Singleton
-@JWTTokenSecured
+//@JWTTokenSecured
 public class DrinkResource {
 
 	private static final Logger logger = LoggerFactory.getLogger(DrinkResource.class);
 
-	private static final List<Drink> DRINKS;
-	static {
-		DRINKS = new ArrayList<>();
-		DRINKS.add(new Drink(1l, "Maracujá"));
-		DRINKS.add(new Drink(2l, "Cajá"));
-		DRINKS.add(new Drink(3l, "Abacaxí"));
-		DRINKS.add(new Drink(4l, "Acerola"));
-		DRINKS.add(new Drink(5l, "Laranja"));
-		DRINKS.add(new Drink(6l, "Limonada"));
-	}
+	private DrinkDAO dao;
 
 	public DrinkResource() {
 		super();
 		logger.info("DrinkResource instantiated");
+		dao = ContextConfig.getInstance().getContext().getBean(DrinkDAO.class);
 	}
 
 	@GET
 	public Response getAll() {
 		logger.info("getAll");
-		return Response.ok().entity(DRINKS).build();
+		return Response.ok().entity(dao.getAll()).build();
 	}
 
 	@GET
@@ -58,7 +48,7 @@ public class DrinkResource {
 		logger.info("getById");
 		Drink result = null;
 		if (id != null) {
-			for (Drink drink : DRINKS) {
+			for (Drink drink : dao.getAll()) {
 				if (drink.getId().equals(id)) {
 					logger.info("pasta found");
 					result = drink;
