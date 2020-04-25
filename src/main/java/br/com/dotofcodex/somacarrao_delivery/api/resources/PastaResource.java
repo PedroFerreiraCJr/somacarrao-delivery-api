@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.config.ContextConfig;
 import br.com.dotofcodex.somacarrao_delivery.dao.PastaDAO;
 import br.com.dotofcodex.somacarrao_delivery.model.Pasta;
@@ -23,7 +24,7 @@ import br.com.dotofcodex.somacarrao_delivery.model.Pasta;
 @Path("/pasta")
 @Produces({ MediaType.APPLICATION_JSON })
 @Singleton
-//@JWTTokenSecured
+@JWTTokenSecured
 public class PastaResource {
 
 	private static final Logger logger = LoggerFactory.getLogger(PastaResource.class);
