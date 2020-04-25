@@ -58,6 +58,10 @@ public class Pasta implements Serializable {
 		return available;
 	}
 
+	public void setAvailable(Boolean available) {
+		this.available = available;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
