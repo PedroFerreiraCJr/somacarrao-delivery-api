@@ -1,8 +1,5 @@
 package br.com.dotofcodex.somacarrao_delivery.api.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,9 +17,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
+import br.com.dotofcodex.somacarrao_delivery.config.ContextConfig;
+import br.com.dotofcodex.somacarrao_delivery.dao.PaymentModeDAO;
 import br.com.dotofcodex.somacarrao_delivery.model.PaymentMode;
 
-@Path("/paymentMode")
+@Path("/payment_mode")
 @Produces({ MediaType.APPLICATION_JSON })
 @Singleton
 @JWTTokenSecured
@@ -30,23 +29,18 @@ public class PaymentModeResource {
 
 	private static final Logger logger = LoggerFactory.getLogger(PaymentModeResource.class);
 
-	private static final List<PaymentMode> PAYMENT_MODE;
-	static {
-		PAYMENT_MODE = new ArrayList<>();
-		PAYMENT_MODE.add(new PaymentMode(1l, "Cartão de Crédito"));
-		PAYMENT_MODE.add(new PaymentMode(2l, "Cartão de Bébito"));
-		PAYMENT_MODE.add(new PaymentMode(3l, "Dinheiro"));
-	}
+	private PaymentModeDAO dao;
 
 	public PaymentModeResource() {
 		super();
 		logger.info("PaymentModeResource instantiated");
+		dao = ContextConfig.getInstance().getContext().getBean(PaymentModeDAO.class);
 	}
 
 	@GET
 	public Response getAll() {
 		logger.info("getAll");
-		return Response.ok().entity(PAYMENT_MODE).build();
+		return Response.ok().entity(dao.getAll()).build();
 	}
 
 	@GET
@@ -55,7 +49,7 @@ public class PaymentModeResource {
 		logger.info("getById");
 		PaymentMode result = null;
 		if (id != null) {
-			for (PaymentMode paymentMode : PAYMENT_MODE) {
+			for (PaymentMode paymentMode : dao.getAll()) {
 				if (paymentMode.getId().equals(id)) {
 					logger.info("pasta found");
 					result = paymentMode;
