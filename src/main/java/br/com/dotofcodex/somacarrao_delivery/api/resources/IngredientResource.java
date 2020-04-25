@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.config.ContextConfig;
 import br.com.dotofcodex.somacarrao_delivery.dao.IngredientDAO;
 import br.com.dotofcodex.somacarrao_delivery.model.Ingredient;
@@ -23,7 +24,7 @@ import br.com.dotofcodex.somacarrao_delivery.model.Ingredient;
 @Path("/ingredient")
 @Produces({ MediaType.APPLICATION_JSON })
 @Singleton
-//@JWTTokenSecured
+@JWTTokenSecured
 public class IngredientResource {
 
 	private static final Logger logger = LoggerFactory.getLogger(IngredientResource.class);

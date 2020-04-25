@@ -1,8 +1,5 @@
 package br.com.dotofcodex.somacarrao_delivery.api.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
+import br.com.dotofcodex.somacarrao_delivery.config.ContextConfig;
+import br.com.dotofcodex.somacarrao_delivery.dao.SeasoningDAO;
 import br.com.dotofcodex.somacarrao_delivery.model.Seasoning;
 
 @Path("/seasoning")
@@ -29,28 +28,19 @@ import br.com.dotofcodex.somacarrao_delivery.model.Seasoning;
 public class SeasoningResource {
 
 	private static final Logger logger = LoggerFactory.getLogger(SeasoningResource.class);
-	
-	private static final List<Seasoning> SEASONINGS;
-	static {
-		SEASONINGS = new ArrayList<>();
-		SEASONINGS.add(new Seasoning(1l, "Batata Palha"));
-		SEASONINGS.add(new Seasoning(2l, "Orégano"));
-		SEASONINGS.add(new Seasoning(3l, "Ovo de Codorna"));
-		SEASONINGS.add(new Seasoning(4l, "Mussarela"));
-		SEASONINGS.add(new Seasoning(5l, "Queijo Ralado"));
-		SEASONINGS.add(new Seasoning(6l, "Cheiro Verde"));
-		SEASONINGS.add(new Seasoning(7l, "Pimentão de Bico"));
-	}
+
+	private SeasoningDAO dao;
 
 	public SeasoningResource() {
 		super();
 		logger.info("SeasoningResource instantiated");
+		dao = ContextConfig.getInstance().getContext().getBean(SeasoningDAO.class);
 	}
 
 	@GET
 	public Response getAll() {
 		logger.info("getAll");
-		return Response.ok().entity(SEASONINGS).build();
+		return Response.ok().entity(dao.getAll()).build();
 	}
 
 	@GET
@@ -59,7 +49,7 @@ public class SeasoningResource {
 		logger.info("getById");
 		Seasoning result = null;
 		if (id != null) {
-			for (Seasoning seasoning : SEASONINGS) {
+			for (Seasoning seasoning : dao.getAll()) {
 				if (seasoning.getId().equals(id)) {
 					logger.info("pasta found");
 					result = seasoning;
