@@ -18,23 +18,24 @@ import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
 import br.com.dotofcodex.somacarrao_delivery.config.ContextConfig;
-import br.com.dotofcodex.somacarrao_delivery.dao.SauceDAO;
-import br.com.dotofcodex.somacarrao_delivery.model.Sauce;
+import br.com.dotofcodex.somacarrao_delivery.dao.OrderStatusDAO;
+import br.com.dotofcodex.somacarrao_delivery.model.Drink;
+import br.com.dotofcodex.somacarrao_delivery.model.OrderStatus;
 
-@Path("/sauce")
+@Path("/orders_status")
 @Produces({ MediaType.APPLICATION_JSON })
 @Singleton
 @JWTTokenSecured
-public class SauceResource {
+public class OrderStatusResource {
 
-	private static final Logger logger = LoggerFactory.getLogger(SauceResource.class);
+	private static final Logger logger = LoggerFactory.getLogger(OrderStatusResource.class);
 
-	private SauceDAO dao;
-	
-	public SauceResource() {
+	private OrderStatusDAO dao;
+
+	public OrderStatusResource() {
 		super();
-		logger.info("SauceResource instantiated");
-		dao = ContextConfig.getInstance().getContext().getBean(SauceDAO.class);
+		logger.info("DrinkResource instantiated");
+		dao = ContextConfig.getInstance().getContext().getBean(OrderStatusDAO.class);
 	}
 
 	@GET
@@ -47,12 +48,12 @@ public class SauceResource {
 	@Path("/{id}")
 	public Response getById(@PathParam("id") Long id) {
 		logger.info("getById");
-		Sauce result = null;
+		OrderStatus result = null;
 		if (id != null) {
-			for (Sauce sauce : dao.getAll()) {
-				if (sauce.getId().equals(id)) {
+			for (OrderStatus status : dao.getAll()) {
+				if (status.getId().equals(id)) {
 					logger.info("pasta found");
-					result = sauce;
+					result = status;
 					break;
 				}
 			}
@@ -68,13 +69,13 @@ public class SauceResource {
 
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response create(Sauce sauce) {
+	public Response create(Drink drink) {
 		return null;
 	}
 
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
-	public Response update(Sauce sauce) {
+	public Response update(Drink drink) {
 		return null;
 	}
 
@@ -83,5 +84,4 @@ public class SauceResource {
 	public Response delete(@PathParam("id") Long id) {
 		return null;
 	}
-
 }

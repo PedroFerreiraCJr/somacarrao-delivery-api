@@ -20,6 +20,7 @@ import br.com.dotofcodex.somacarrao_delivery.api.resources.ExtraResource;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.FlavorResource;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.IngredientResource;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.OrderResource;
+import br.com.dotofcodex.somacarrao_delivery.api.resources.OrderStatusResource;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.PastaResource;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.PaymentModeResource;
 import br.com.dotofcodex.somacarrao_delivery.api.resources.PlateResource;
@@ -58,6 +59,7 @@ public class App extends Application {
 		classes.add(PaymentModeResource.class);
 		classes.add(PlateResource.class);
 		classes.add(OrderResource.class);
+		classes.add(OrderStatusResource.class);
 		classes.add(AddressResource.class);
 		classes.add(UserResource.class);
 
