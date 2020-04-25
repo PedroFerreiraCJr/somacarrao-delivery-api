@@ -1,8 +1,5 @@
 package br.com.dotofcodex.somacarrao_delivery.api.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,9 +17,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
+import br.com.dotofcodex.somacarrao_delivery.config.ContextConfig;
+import br.com.dotofcodex.somacarrao_delivery.dao.SauceQuantityDAO;
 import br.com.dotofcodex.somacarrao_delivery.model.SauceQuantity;
 
-@Path("/sauceQuantity")
+@Path("/sauce_quantity")
 @Produces({ MediaType.APPLICATION_JSON })
 @Singleton
 @JWTTokenSecured
@@ -30,23 +29,18 @@ public class SauceQuantityResource {
 
 	private static final Logger logger = LoggerFactory.getLogger(SauceQuantityResource.class);
 
-	private static final List<SauceQuantity> SAUCE_QUANTITIES;
-	static {
-		SAUCE_QUANTITIES = new ArrayList<SauceQuantity>();
-		SAUCE_QUANTITIES.add(new SauceQuantity(1l, "Pouco"));
-		SAUCE_QUANTITIES.add(new SauceQuantity(2l, "Normal"));
-		SAUCE_QUANTITIES.add(new SauceQuantity(3l, "Muito"));
-	}
+	private SauceQuantityDAO dao;
 
 	public SauceQuantityResource() {
 		super();
-		logger.info("SimpleResource instantiated");
+		logger.info("SauceQuantityResource instantiated");
+		dao = ContextConfig.getInstance().getContext().getBean(SauceQuantityDAO.class);
 	}
 
 	@GET
 	public Response getAll() {
 		logger.info("getAll");
-		return Response.ok().entity(SAUCE_QUANTITIES).build();
+		return Response.ok().entity(dao.getAll()).build();
 	}
 
 	@GET
@@ -55,9 +49,9 @@ public class SauceQuantityResource {
 		logger.info("getById");
 		SauceQuantity result = null;
 		if (id != null) {
-			for (SauceQuantity suauceQuantity : SAUCE_QUANTITIES) {
-				if (suauceQuantity.equals(id)) {
-					logger.info("pasta found");
+			for (SauceQuantity suauceQuantity : dao.getAll()) {
+				if (suauceQuantity.getId().equals(id)) {
+					logger.info("sauce quantity found");
 					result = suauceQuantity;
 					break;
 				}
