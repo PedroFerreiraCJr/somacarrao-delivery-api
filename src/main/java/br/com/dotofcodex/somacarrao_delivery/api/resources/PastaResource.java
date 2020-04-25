@@ -1,8 +1,5 @@
 package br.com.dotofcodex.somacarrao_delivery.api.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,36 +16,30 @@ import javax.ws.rs.core.Response.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
+import br.com.dotofcodex.somacarrao_delivery.config.ContextConfig;
+import br.com.dotofcodex.somacarrao_delivery.dao.PastaDAO;
 import br.com.dotofcodex.somacarrao_delivery.model.Pasta;
 
 @Path("/pasta")
 @Produces({ MediaType.APPLICATION_JSON })
 @Singleton
-@JWTTokenSecured
+//@JWTTokenSecured
 public class PastaResource {
 
 	private static final Logger logger = LoggerFactory.getLogger(PastaResource.class);
 
-	private static final List<Pasta> PASTAS;
-	static {
-		PASTAS = new ArrayList<Pasta>();
-		PASTAS.add(new Pasta(1l, "Espaguete"));
-		PASTAS.add(new Pasta(2l, "Parafuso"));
-		PASTAS.add(new Pasta(3l, "Penne"));
-		PASTAS.add(new Pasta(4l, "Talharim"));
-		PASTAS.add(new Pasta(5l, "Massa Integral"));
-	}
+	private PastaDAO dao;
 
 	public PastaResource() {
 		super();
 		logger.info("PastaResource instantiated");
+		dao = ContextConfig.getInstance().getContext().getBean(PastaDAO.class);
 	}
 
 	@GET
 	public Response getAll() {
 		logger.info("getAll");
-		return Response.ok().entity(PASTAS).build();
+		return Response.ok().entity(dao.getAll()).build();
 	}
 
 	@GET
@@ -57,7 +48,7 @@ public class PastaResource {
 		logger.info("getById");
 		Pasta result = null;
 		if (id != null) {
-			for (Pasta pasta : PASTAS) {
+			for (Pasta pasta : dao.getAll()) {
 				if (pasta.getId().equals(id)) {
 					logger.info("pasta found");
 					result = pasta;
