@@ -1,8 +1,5 @@
 package br.com.dotofcodex.somacarrao_delivery.api.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,33 +16,30 @@ import javax.ws.rs.core.Response.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.dotofcodex.somacarrao_delivery.api.annotation.JWTTokenSecured;
+import br.com.dotofcodex.somacarrao_delivery.config.ContextConfig;
+import br.com.dotofcodex.somacarrao_delivery.dao.SauceDAO;
 import br.com.dotofcodex.somacarrao_delivery.model.Sauce;
 
 @Path("/sauce")
 @Produces({ MediaType.APPLICATION_JSON })
 @Singleton
-@JWTTokenSecured
+//@JWTTokenSecured
 public class SauceResource {
 
 	private static final Logger logger = LoggerFactory.getLogger(SauceResource.class);
 
-	private static final List<Sauce> SAUCES;
-	static {
-		SAUCES = new ArrayList<>();
-		SAUCES.add(new Sauce(1l, "Molho do Tomate"));
-		SAUCES.add(new Sauce(2l, "Molho Branco"));
-	}
-
+	private SauceDAO dao;
+	
 	public SauceResource() {
 		super();
 		logger.info("SauceResource instantiated");
+		dao = ContextConfig.getInstance().getContext().getBean(SauceDAO.class);
 	}
 
 	@GET
 	public Response getAll() {
 		logger.info("getAll");
-		return Response.ok().entity(SAUCES).build();
+		return Response.ok().entity(dao.getAll()).build();
 	}
 
 	@GET
@@ -54,7 +48,7 @@ public class SauceResource {
 		logger.info("getById");
 		Sauce result = null;
 		if (id != null) {
-			for (Sauce sauce : SAUCES) {
+			for (Sauce sauce : dao.getAll()) {
 				if (sauce.getId().equals(id)) {
 					logger.info("pasta found");
 					result = sauce;
