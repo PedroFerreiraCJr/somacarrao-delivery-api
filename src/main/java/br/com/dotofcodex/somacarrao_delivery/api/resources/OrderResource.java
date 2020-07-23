@@ -1,7 +1,6 @@
 package br.com.dotofcodex.somacarrao_delivery.api.resources;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
@@ -14,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,11 +29,6 @@ public class OrderResource {
 
 	private static final Logger logger = LoggerFactory.getLogger(OrderResource.class);
 
-	private static final List<Order> ORDERS;
-	static {
-		ORDERS = new ArrayList<>();
-	}
-
 	public OrderResource() {
 		super();
 		logger.info("OrderResource instantiated");
@@ -48,7 +43,27 @@ public class OrderResource {
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	public Response create(Order order) {
-		return null;
+		if (order == null) {
+			return Response.status(Status.BAD_REQUEST).entity("Pedido inválido").build();
+		}
+
+		if (order.getPlates() == null || order.getPlates().isEmpty()) {
+			return Response.status(Status.BAD_REQUEST).entity("Não há pratos no pedido").build();
+		}
+
+		if (order.getUser() == null) {
+			return Response.status(Status.BAD_REQUEST).entity("Usuário inválido").build();
+		}
+		
+		if (order.getDeliveryTo() == null) {
+			return Response.status(Status.BAD_REQUEST).entity("Endereço inválido").build();
+		}
+
+		if (order.getTotal() != calcOrderPrice(order)) {
+			return Response.status(Status.BAD_REQUEST).entity("Usuário inválido").build();
+		}
+
+		return Response.ok().entity(UUID.randomUUID()).build();
 	}
 
 	@PUT
@@ -61,5 +76,9 @@ public class OrderResource {
 	@Path("/{id}")
 	public Response delete(@PathParam("id") Long id) {
 		return null;
+	}
+
+	private double calcOrderPrice(Order order) {
+		return .0;
 	}
 }
