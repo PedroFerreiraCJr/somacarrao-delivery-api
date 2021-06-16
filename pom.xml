@@ -27,7 +27,7 @@
 		<jaxrs.version>2.1.1</jaxrs.version>
 		<jersey2.version>2.29.1</jersey2.version>
 		<jersey2-media.version>2.29.1</jersey2-media.version>
-		<tomcat-embed.version>9.0.35</tomcat-embed.version>
+		<tomcat-embed.version>9.0.41</tomcat-embed.version>
 		<jstl-api.version>1.2</jstl-api.version>
 		<jstl-impl.version>1.2</jstl-impl.version>
 		<postgresql.version>42.2.9</postgresql.version>
